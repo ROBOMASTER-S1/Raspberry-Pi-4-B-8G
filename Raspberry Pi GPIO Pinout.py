@@ -37,6 +37,11 @@ GPIO.setup(37,GPIO.OUT) # GPIO 26
 GPIO.output(7,GPIO.HIGH) # On
 GPIO.output(7,GPIO.LOW) # Off
 
+# Note: make sure to turn off all GPIO pins first before
+# stopping any programs.
+
+GPIO.cleanup() # Release all GPIO pins
+
 # You can also use the Broadcom SOC Channel method
 # if you prefer.
 
@@ -67,3 +72,8 @@ GPIO.setup(26,GPIO.OUT) # PIN 37
 
 GPIO.output(4,GPIO.HIGH) # On
 GPIO.output(4,GPIO.LOW) # Off
+
+# Note: make sure to turn off all GPIO pins first before
+# stopping any programs.
+
+GPIO.cleanup() # Release all GPIO pins
