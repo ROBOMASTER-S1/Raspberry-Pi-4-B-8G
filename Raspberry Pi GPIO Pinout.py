@@ -52,6 +52,7 @@ GPIO.cleanup() # Release all GPIO pins
 # if you prefer.
 
 GPIO.setmode(GPIO.BCM)
+
 GPIO.setup(0,GPIO.OUT) # PIN 27
 GPIO.setup(1,GPIO.OUT) # PIN 28
 GPIO.setup(2,GPIO.OUT) # PIN 3
