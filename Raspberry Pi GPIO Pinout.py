@@ -4,8 +4,8 @@
 # these Cheat Sheets examples for quick references and
 # understanding of the GPIO pin layout. My first Ras Pi
 # project will envolve 10 red LEDs that will flash, flicker
-# and chase one another using Python. So be looking out for
-# this.
+# and chase one another using Python. So be looking out
+# for this.
 
 # (GPIO) General Purpose Input/Output: Pinouts
 
@@ -51,6 +51,7 @@ GPIO.cleanup() # Release all GPIO pins
 # You can also use the Broadcom SOC Channel method
 # if you prefer.
 
+import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(0,GPIO.OUT) # PIN 27
