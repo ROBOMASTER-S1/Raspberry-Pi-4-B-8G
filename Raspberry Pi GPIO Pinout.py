@@ -1,5 +1,5 @@
 # These are all the GPIO pins that you can use for lighting
-# up LEDs or whatever devices that can safely use these
+# up LEDs or whatever devices that can 'safely' use these
 # GPIO pins. I'm pretty new to using Raspberry Pi, I created
 # these Cheat Sheets examples for quick references and
 # understanding of the GPIO pin layout. My first Ras Pi
@@ -12,6 +12,8 @@
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
 
+GPIO.setup(27,GPIO.OUT) # GPIO 0
+GPIO.setup(28,GPIO.OUT) # GPIO 1
 GPIO.setup(3,GPIO.OUT) # GPIO 2
 GPIO.setup(5,GPIO.OUT) # GPIO 3
 GPIO.setup(7,GPIO.OUT) # GPIO 4
@@ -50,7 +52,8 @@ GPIO.cleanup() # Release all GPIO pins
 # if you prefer.
 
 GPIO.setmode(GPIO.BCM)
-
+GPIO.setup(0,GPIO.OUT) # PIN 27
+GPIO.setup(1,GPIO.OUT) # PIN 28
 GPIO.setup(2,GPIO.OUT) # PIN 3
 GPIO.setup(3,GPIO.OUT) # PIN 5
 GPIO.setup(4,GPIO.OUT) # PIN 7
