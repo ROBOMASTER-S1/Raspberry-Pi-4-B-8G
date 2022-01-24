@@ -11,6 +11,8 @@
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
 
+GPIO.setup(3,GPIO.OUT) # GPIO 2
+GPIO.setup(5,GPIO.OUT) # GPIO 3
 GPIO.setup(7,GPIO.OUT) # GPIO 4
 GPIO.setup(29,GPIO.OUT) # GPIO 5
 GPIO.setup(31,GPIO.OUT) # GPIO 6
@@ -31,6 +33,7 @@ GPIO.setup(16,GPIO.OUT) # GPIO 23
 GPIO.setup(18,GPIO.OUT) # GPIO 24
 GPIO.setup(22,GPIO.OUT) # GPIO 25
 GPIO.setup(37,GPIO.OUT) # GPIO 26
+GPIO.setup(13,GPIO.OUT) # GPIO 27
 
 # Use these GPIO commands to turn GPIO pins ON or OFF
 
@@ -47,6 +50,8 @@ GPIO.cleanup() # Release all GPIO pins
 
 GPIO.setmode(GPIO.BCM)
 
+GPIO.setup(2,GPIO.OUT) # PIN 3
+GPIO.setup(3,GPIO.OUT) # PIN 5
 GPIO.setup(4,GPIO.OUT) # PIN 7
 GPIO.setup(5,GPIO.OUT) # PIN 29
 GPIO.setup(6,GPIO.OUT) # PIN 31
@@ -67,6 +72,7 @@ GPIO.setup(23,GPIO.OUT) # PIN 16
 GPIO.setup(24,GPIO.OUT) # PIN 18
 GPIO.setup(25,GPIO.OUT) # PIN 22
 GPIO.setup(26,GPIO.OUT) # PIN 37
+GPIO.setup(27,GPIO.OUT) # PIN 13
 
 # Use these GPIO commands to turn GPIO pins ON or OFF
 
