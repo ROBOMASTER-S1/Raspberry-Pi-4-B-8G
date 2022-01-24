@@ -3,7 +3,7 @@
 # GPIO pins. I'm pretty new to using Raspberry Pi, I created
 # these Cheat Sheets examples for quick references and
 # understanding of the GPIO pin layout. My first Ras Pi
-# project will envolve 8 red LEDs that will flash, flicker and chase
+# project will envolve 10 red LEDs that will flash, flicker and chase
 # one another using Python. So be looking out for this.
 
 # (GPIO) General Purpose Input/Output: Pinouts
