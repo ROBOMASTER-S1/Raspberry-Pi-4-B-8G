@@ -32,7 +32,7 @@ GPIO.setup(16,GPIO.IN,pull_up_down=GPIO.PUD_UP)
 display.lcd_backlight(0)
 
 print('starting program:')
-print('\nPress the Magic ` Button:')
+print('\nPress the Magic Button:')
 
 try:
     while True:
