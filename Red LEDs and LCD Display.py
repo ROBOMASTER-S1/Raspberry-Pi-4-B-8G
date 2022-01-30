@@ -23,6 +23,7 @@ GPIO.setwarnings(False)
 
 pins=(7,11,13,15,29,31,33,35,37,12)
 position_tuple=(0,2,4,6,8)
+display=drivers.Lcd();hz=500
 
 display=drivers.Lcd()
 display.lcd_clear()
@@ -54,6 +55,7 @@ def red_led_flash():
         for j in range(10):
             GPIO.output(pins[j],GPIO.HIGH)
         wait(.1)
+       
     for i in pins:
         GPIO.output(i,GPIO.LOW)
     display.lcd_clear()
@@ -75,6 +77,7 @@ def red_led_back_forth():
             GPIO.output(pins[j],GPIO.HIGH)
             wait(.05)
             GPIO.output(pins[j],GPIO.LOW)
+           
     display.lcd_clear()
    
 def red_led_back_forth_inverse():
@@ -103,9 +106,6 @@ def red_led_back_forth_inverse():
            
     display.lcd_clear()
 
-for i in pins:
-    GPIO.output(i,GPIO.LOW)
-
 def red_leds_side_to_side():
    
     display.lcd_display_string(
@@ -129,6 +129,7 @@ def red_leds_side_to_side():
         for j in range(9,-1,-1):
             GPIO.output(pins[j],GPIO.LOW)
             wait(.05)
+           
     display.lcd_clear()
      
 def red_leds_inward_outward():
@@ -177,6 +178,7 @@ def red_leds_inward_outward():
         GPIO.output(pins[4-i],GPIO.LOW)
         GPIO.output(pins[5+i],GPIO.LOW)
         wait(.1)
+       
     display.lcd_clear()
 
 def red_leds_collision():
@@ -212,7 +214,8 @@ def red_leds_collision():
         GPIO.output(pins[9-i],GPIO.HIGH)
         wait(.1)
         GPIO.output(pins[0+i],GPIO.LOW)
-        GPIO.output(pins[9-i],GPIO.LOW)    
+        GPIO.output(pins[9-i],GPIO.LOW)
+       
     display.lcd_clear()
    
 def red_leds_collision_inverse():
@@ -261,6 +264,7 @@ def red_leds_collision_inverse():
         wait(.1)
         GPIO.output(pins[0+i],GPIO.HIGH)
         GPIO.output(pins[9-i],GPIO.HIGH)
+       
     display.lcd_clear()
 
 def red_leds_glitch_right_left():
@@ -284,6 +288,7 @@ def red_leds_glitch_right_left():
 
         for j in range(5,10):
             GPIO.output(pins[j],GPIO.LOW)
+           
     display.lcd_clear()
    
 def red_leds_glitch_left_right():
@@ -307,6 +312,7 @@ def red_leds_glitch_left_right():
 
         for j in range(5):
             GPIO.output(pins[j],GPIO.LOW)
+           
     display.lcd_clear()
    
 def red_leds_follow_left():
@@ -330,6 +336,7 @@ def red_leds_follow_left():
 
         for j in position_tuple:
             GPIO.output(pins[j+1],GPIO.LOW)
+           
     display.lcd_clear()
 
 def red_leds_follow_right():
@@ -354,9 +361,46 @@ def red_leds_follow_right():
 
         for j in position_tuple:
             GPIO.output(pins[j],GPIO.LOW)
+           
     display.lcd_clear()
 
+def red_leds_breathe():
+   
+    a0=GPIO.PWM(pins[0],hz)
+    a1=GPIO.PWM(pins[1],hz)
+    a2=GPIO.PWM(pins[2],hz)
+    a3=GPIO.PWM(pins[3],hz)
+    a4=GPIO.PWM(pins[4],hz)
+    a5=GPIO.PWM(pins[5],hz)
+    a6=GPIO.PWM(pins[6],hz)
+    a7=GPIO.PWM(pins[7],hz)
+    a8=GPIO.PWM(pins[8],hz)
+    a9=GPIO.PWM(pins[9],hz)
+
+    dimmer=(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9)
+   
+    display.lcd_display_string(
+    'RED LEDS',1)
+    display.lcd_display_string(
+    'BREATHE:',2)
+
+    for x in range(2):
+        for i in range(0,100,3):
+            for j in dimmer:
+                j.start(0)
+                j.ChangeDutyCycle(i)
+                wait(.01)
+
+        for i in range(100,-1,-3):
+            for j in dimmer:
+                j.start(0)
+                j.ChangeDutyCycle(i)
+                wait(.01)
+               
+    display.lcd_clear()
+   
 functions_tuple=(
+    red_leds_breathe,
     red_led_back_forth,
     red_led_back_forth_inverse,
     red_leds_side_to_side,
