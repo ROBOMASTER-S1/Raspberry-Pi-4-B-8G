@@ -17,7 +17,7 @@
 # LED's = 12
 # 220 ohm resistor = 12
 # 10K ohm resistor = 1
-# jumper wire = 16+2 for the Rasp fan
+# jumper wire = 17+2 for the Rasp fan
 
 # Note: use two other jumper wires for
 # the Raspberry Pi 4 fan, while in use/
