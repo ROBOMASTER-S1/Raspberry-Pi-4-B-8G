@@ -35,6 +35,7 @@
 # video example.
 
 # Youtube video link:
+# https://www.youtube.com/watch?v=SotulsGjNFE
 
 # We will use the breadboard method:
 
