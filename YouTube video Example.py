@@ -36,25 +36,35 @@
 
 # Youtube video link:
 
+# We will use the breadboard method:
+
+# GPIO.setmode(GPIO.BOARD)
+
+# This method is for the GPIO pinouts
+# not the GPIO numbers, such as BCM
+
+# You can also use the Broadcom SOC
+# Channel method if you prefer:
+
+# GPIO.setmode(GPIO.BCM)
+# This allows GPIO numbers, not GPIO
+# pinouts, such as the breadboard
+# method illustrates in our Python
+# program example:
+
 from time import sleep as wait
 import RPi.GPIO as GPIO,drivers,random
-
-GPIO.setmode(GPIO.BOARD) # breadboard method
-GPIO.setwarnings(False) # disable setwarnings
-display=drivers.Lcd() # enable the LCD display
-
-# setup the button, while invoking the built-in
-# Raspberry Pi 4 resistor for safe protection
-# along with a 10K resistor for added protection.
-
-GPIO.setup(16,GPIO.IN,pull_up_down=GPIO.PUD_UP)
-
-display.lcd_clear() # clear the LCD screen
 
 # Breadboard Metod:
 # Actual GPIO Pinouts
 
 pins=(7,11,13,15,29,31,33,35,37,12)
+
+GPIO.setmode(GPIO.BOARD) # breadboard method
+GPIO.setwarnings(False) # disable setwarnings
+display=drivers.Lcd() # enable the LCD display
+
+display.lcd_clear() # clear the LCD screen
 
 # led position tuples:
 
@@ -65,6 +75,12 @@ display=drivers.Lcd();hz=500
 
 GPIO.setup(36,GPIO.OUT) # for blue led
 GPIO.setup(38,GPIO.OUT) # for yellow led
+
+# setup the button, while invoking the built-in
+# Raspberry Pi 4 resistor for safe protection
+# along with a 10K resistor for added protection.
+
+GPIO.setup(16,GPIO.IN,pull_up_down=GPIO.PUD_UP)
 
 GPIO.output(36,GPIO.LOW)
 for i in pins:
@@ -647,8 +663,8 @@ functions_tuple=(
     red_leds_random,
     red_leds_random)
  
-try:
-    while True:
+while True:
+    try:
         if GPIO.input(16)==0:
             GPIO.output(38,GPIO.LOW)
             display.lcd_clear()
@@ -661,15 +677,16 @@ try:
             'AGAIN PLEASE!',2)
 
 # Note: it is recomended that you setup
-# a KeyboardInterrupt to force the GPIO
-# pins to return to a low state/off.
+# a KeyboardInterrupt handler to force
+# the GPIO pins to return to a low state/off.
 
 # GPIO.cleanup() sets all GPIO pins to LOW/OFF
 
-except KeyboardInterrupt:
-    print('\nStop program Execution/run:')
-    print('cleanup/release all GPIO pinouts \
+    except KeyboardInterrupt:
+        print('\nStop program Execution/run:')
+        print('cleanup/release all GPIO pinouts \
 to LOW state.')
-    display.lcd_clear()
-    display.lcd_backlight(0)
-    GPIO.cleanup()
+        display.lcd_clear()
+        display.lcd_backlight(0)
+        GPIO.cleanup()
+        break
