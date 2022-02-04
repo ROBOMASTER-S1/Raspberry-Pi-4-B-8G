@@ -13,7 +13,7 @@
 # Respberry Pi 4 = 1
 # breadboard = 1
 # LCD display = 1
-# LED's = 13
+# LEDs = 13
 # 220 ohm resistor = 13
 # jumper wire = 17+2 for the Rasp fan
 
@@ -23,12 +23,12 @@
 
 # GPIO PIN NUMBER HELP Python program:
 
-# The Raspberry Pi 4 Python program
+# This Raspberry Pi 4 Python program
 # allows users to input pin numbers
 # and learn where the GPIO pins are
 # with LED indicators that flash three
 # times showing where the GPIO pinouts
-# reside. Next follow the wires.
+# reside. Next follow the wires.12
 
 # We will use the breadboard method:
 
