@@ -49,11 +49,13 @@
 from time import sleep as wait
 import RPi.GPIO as GPIO,drivers
 
+
 # Breadboard Metod:
 # Actual GPIO Pinouts
 
-pins=(40,7,11,13,15,29,
-36,31,33,35,37,12,38)
+pins1=[7,11,13,15,19,21,23,29,31,33,35,37,32]
+
+pins2=[18,16,12]
 
 GPIO.setmode(GPIO.BOARD) # breadboard method
 GPIO.setwarnings(False) # disable setwarnings
@@ -61,9 +63,13 @@ display=drivers.Lcd() # enable the LCD display
 
 display.lcd_clear() # clear the LCD screen
 
-for i in pins:
+for i in pins1:
     GPIO.setup(i,GPIO.OUT)
-    GPIO.output(i,GPIO.LOW)
+    GPIO.output(i,0)
+    
+for i in pins2:
+    GPIO.setup(i,GPIO.OUT)
+    GPIO.output(i,1)
     
 # Start creating text with the LCD display
 
@@ -97,10 +103,12 @@ while True:
         f'FLASH = 3 TIMES:',2)
         
         for i in range(3):
-            GPIO.output(message,GPIO.HIGH)    
+            GPIO.output(message,1)    
             wait(1)
-            GPIO.output(message,GPIO.LOW)
+            GPIO.output(message,0)
             wait(1)
+        for i in pins2:
+            GPIO.output(i,1)
             
 # Note: it is recomended that you setup
 # a KeyboardInterrupt handler to force
