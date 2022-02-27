@@ -13,9 +13,10 @@
 # Respberry Pi 4 = 1
 # breadboard = 1
 # LCD display = 1
+# RGB LED = 1
 # LEDs = 13
-# 220 ohm resistor = 13
-# jumper wire = 17+2 for the Rasp fan
+# 220 ohm resistor = 16
+# jumper wire = 20+2 for the Rasp pi fan
 
 # Note: use two other jumper wires for
 # the Raspberry Pi 4 fan, while in use/
@@ -28,7 +29,7 @@
 # and learn where the GPIO pins are
 # with LED indicators that flash three
 # times showing where the GPIO pinouts
-# reside. Next follow the wires.12
+# reside. Next follow the wires.
 
 # We will use the breadboard method:
 
@@ -48,7 +49,6 @@
 
 from time import sleep as wait
 import RPi.GPIO as GPIO,drivers
-
 
 # Breadboard Metod:
 # Actual GPIO Pinouts
