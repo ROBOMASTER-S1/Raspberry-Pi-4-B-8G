@@ -47,8 +47,8 @@
 # method illustrates in our Python
 # program example:
 
-from time import sleep as wait
 import RPi.GPIO as GPIO,drivers
+from time import sleep as wait
 
 # Breadboard Metod:
 # Actual GPIO Pinouts
