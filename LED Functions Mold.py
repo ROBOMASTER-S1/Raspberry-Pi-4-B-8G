@@ -31,9 +31,7 @@ for i in RGB_led:
 for i in yellow_leds:
     GPIO.setup(i,GPIO.OUT)
     GPIO.output(i,0)
-
-led_speed=.3
-
+    
 def red_led_flash():
 
     for i in range(4):
