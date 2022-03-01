@@ -12,13 +12,10 @@ RGB_led=[18,16,12]
 
 RGB_mix=[[18,12],[18,16],[16,12]]
 
-led_speed=.3
+led_speed=.1
 
 GPIO.setmode(GPIO.BOARD) # breadboard method
 GPIO.setwarnings(False) # disable setwarnings
-display=drivers.Lcd() # enable the LCD display
-
-display.lcd_clear() # clear the LCD screen
 
 for i in red_leds:
     GPIO.setup(i,GPIO.OUT)
@@ -31,10 +28,10 @@ for i in RGB_led:
 for i in yellow_leds:
     GPIO.setup(i,GPIO.OUT)
     GPIO.output(i,0)
-    
-def red_led_flash():
 
-    for i in range(4):
+def red_leds_flash():
+
+    for i in range(5):
         for j in red_leds:
             GPIO.output(j,1)
             
@@ -381,7 +378,7 @@ def red_leds_stack_outward():
         GPIO.output(i,0)
 
 led_functions=[
-    red_led_flash,
+    red_leds_flash,
     red_led_single_right,
     red_led_single_left,
     red_leds_side_to_side_right,
