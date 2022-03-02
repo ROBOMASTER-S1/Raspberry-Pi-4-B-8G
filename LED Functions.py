@@ -554,6 +554,12 @@ while True:
         for i in led_functions:
             i();red_leds_flash()
             
+# Note: it is recomended that you setup
+# a KeyboardInterrupt handler to force
+# the GPIO pins to return to a low state/off.
+
+# GPIO.cleanup() sets all GPIO pins to LOW/OFF
+
     except KeyboardInterrupt:
         print('\nStop program Execution/run:')
         print('cleanup/release all GPIO pinouts \
