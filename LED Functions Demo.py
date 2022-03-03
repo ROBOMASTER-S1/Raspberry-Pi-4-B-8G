@@ -338,6 +338,8 @@ def red_led_single_right_inverse():
             wait(led_speed)
             GPIO.output(red_leds[i],1)
             
+        for i in red_leds:
+            GPIO.output(i,0)            
         for i in yellow_leds:
             GPIO.output(i,0)
         GPIO.output(RGB_mix[1],1)
@@ -354,6 +356,8 @@ def red_led_single_left_inverse():
             wait(led_speed)
             GPIO.output(red_leds[i],1)
             
+        for i in red_leds:
+            GPIO.output(i,0)   
         for i in yellow_leds:
             GPIO.output(i,0)
         GPIO.output(RGB_mix[1],1)
