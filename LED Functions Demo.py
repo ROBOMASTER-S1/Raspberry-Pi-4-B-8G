@@ -95,7 +95,10 @@ RGB_led=[18,16,12]
 
 RGB_mix=[[18,12],[18,16],[16,12]]
 
-hz=500 # LED dimmer herz
+RGB_logic=[18,16,12,[18,16],
+[18,12],[12,16],[18,16,12,16]]
+
+hz=500 # LED dimmer herz value
 
 led_speed=.1
 
@@ -113,6 +116,18 @@ for i in RGB_led:
 for i in yellow_leds:
     GPIO.setup(i,GPIO.OUT)
     GPIO.output(i,0)
+    
+def RGB_led_twinkle():
+    
+    for i in range(7):
+        GPIO.output(RGB_logic[i],0)
+        wait(led_speed)
+        GPIO.output(RGB_logic[i],1)
+        
+    for i in range(5,-1,-1):
+        GPIO.output(RGB_logic[i],0)
+        wait(led_speed)
+        GPIO.output(RGB_logic[i],1)
 
 def red_leds_flash():
 
@@ -299,7 +314,7 @@ def red_leds_collision_outward():
     
 def red_leds_follow():
     
-    for i in range(7):
+    for i in range(5):
         for j in range(0,10,2):
             GPIO.output(red_leds[j],1)
             
@@ -513,32 +528,34 @@ def red_leds_breathe():
 
     dimmer=(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9)
 
-    for x in range(2):
-        GPIO.output(RGB_led[0],0)
-        for i in range(0,50,3):
-            for j in dimmer:
-                j.start(0)
-                j.ChangeDutyCycle(i)
-                wait(.01)
+    GPIO.output(RGB_led[0],0)
+    for i in range(0,100,2):
+        for j in dimmer:
+            j.start(0)
+            j.ChangeDutyCycle(i)
+        for i in yellow_leds:
+            GPIO.output(i,1)
+            wait(.02)
 
-        for i in range(50,-1,-3):
-            GPIO.output(RGB_mix[1],0)
-            for j in yellow_leds:
-                GPIO.output(j,1)
-            for j in dimmer:
-                j.start(0)
-                j.ChangeDutyCycle(i)
-                wait(.01)
-            GPIO.output(RGB_mix[1],1)
-            for i in yellow_leds:
-                GPIO.output(i,0)
-                
+    for i in range(100,-1,-2):
+        GPIO.output(RGB_mix[1],0)
+        for j in dimmer:
+            j.start(0)
+            j.ChangeDutyCycle(i)
+        for i in yellow_leds:
+            GPIO.output(i,0)
+            wait(.02)
+        GPIO.output(RGB_mix[1],1)
+            
+red_leds_breathe()
+RGB_led_twinkle()
+red_leds_flash()
+    
 led_functions=[
-    red_leds_breathe,
-    red_led_single_right,
-    red_led_single_left_inverse,
-    red_leds_side_to_side_right,
+    red_led_single_left,
+    red_led_single_right_inverse,
     red_leds_side_to_side_left,
+    red_leds_side_to_side_right,
     red_leds_follow,
     red_leds_collision_inward,
     red_leds_collision_outward_inverse,
@@ -546,17 +563,19 @@ led_functions=[
     red_leds_outward,
     red_leds_collision_inward_inverse,
     red_leds_collision_outward,
-    red_leds_stack_right,
-    red_leds_stack_left,
     red_leds_stack_inward,
-    red_leds_stack_outward]
+    red_leds_stack_outward,
+    red_leds_stack_left,
+    red_leds_stack_right,
+    ]
 
-print(len(led_functions),'LED Functions:')
+print('You used',len(led_functions),
+      'LED Functions:')
 
 while True:
     try:
         for i in led_functions:
-            i();red_leds_flash()
+            i()
             
 # Note: it is recomended that you setup
 # a KeyboardInterrupt handler to force
