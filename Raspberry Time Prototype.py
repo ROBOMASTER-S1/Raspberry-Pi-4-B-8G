@@ -81,7 +81,7 @@
 # board layout, I use so you can follow
 # right along with my video example.
 
-import RPi.GPIO as GPIO,drivers,threading
+import time,RPi.GPIO as GPIO,drivers,threading
 from datetime import datetime
 from time import sleep as wait
 
@@ -104,6 +104,8 @@ RGB_logic=[18,16,12,[18,16],
 hz=500 # LED dimmer herz value
 
 led_speed=.1
+
+delay=30
 
 GPIO.setmode(GPIO.BOARD) # breadboard method
 GPIO.setwarnings(False) # disable setwarnings
@@ -169,18 +171,31 @@ display.lcd_display_string(
 '''
 def raspberry_time():
     
-    while True:
-        for i in range(120):
+    while True:            
+        for i in range(delay):
+            gettime=datetime.now().strftime('Local%l:%M:%S %p')
+            
+            display.lcd_display_string(' RASPBERRY TIME ', 1)            
+            display.lcd_display_string(gettime,2)
+            
+        for i in range(delay):
+            gettime=datetime.now().strftime('Local %H:%M:%S  ')
+            
+            display.lcd_display_string(' RASPBERRY TIME ', 1)            
+            display.lcd_display_string(gettime,2)
+            
+        for i in range(delay):
             display.lcd_display_string(
                 ' RASPBERRY TIME ', 1)
             display.lcd_display_string(
                 str(datetime.now().time())+' ', 2)
             
-        for i in range(120):
-            display.lcd_display_string(
-                ' RASPBERRY TIME ', 1)
-            display.lcd_display_string(
-                str(datetime.now())+' ', 2)
+        for i in range(delay):
+            getdate=datetime.now().strftime('%a %b%e, %Y')
+            getyear=datetime.now().strftime('Week #%U/Day %j')
+            
+            display.lcd_display_string(getdate,1)
+            display.lcd_display_string(getyear,2)
 
 def RGB_led_twinkle():
     
