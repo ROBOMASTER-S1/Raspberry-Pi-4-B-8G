@@ -167,9 +167,9 @@ display.lcd_display_string(
 '''
 
 title=' RASPBERRY TIME '
-scrolltext='BY Joseph C. Richardson. \
+scrolltext='By Joseph C. Richardson. \
 You can find all my Python Programs \
-on GitHub.com under my username Robomaster S1 .'
+on GitHub.com under my username Robomaster S1 '
 
 def raspberry_time():
     
@@ -177,18 +177,17 @@ def raspberry_time():
         for i in range(delay):
             gettime=datetime.now().strftime('Local%l:%M:%S %p')
             
-            display.lcd_display_string(' RASPBERRY TIME ', 1)            
+            display.lcd_display_string(title, 1)            
             display.lcd_display_string(gettime,2)
             
         for i in range(delay):
             gettime=datetime.now().strftime('Local %H:%M:%S  ')
             
-            display.lcd_display_string(' RASPBERRY TIME ', 1)            
+            display.lcd_display_string(title, 1)            
             display.lcd_display_string(gettime,2)
             
         for i in range(delay):
-            display.lcd_display_string(
-                ' RASPBERRY TIME ', 1)
+            display.lcd_display_string(title, 1)
             display.lcd_display_string(
                 str(datetime.now().time())+' ', 2)
             
@@ -199,11 +198,15 @@ def raspberry_time():
             display.lcd_display_string(getdate,1)
             display.lcd_display_string(getyear,2)
             
+        display.lcd_display_string(title,1)            
+        display.lcd_display_string('By Joseph C. Ric',2)
+        wait(1)
+            
         for i in range(len(scrolltext)):
             display.lcd_display_string(title, 1)
             display.lcd_display_string(
             scrolltext[i:i+16],2)
-            wait(0.1) 
+            wait(0.1)
 
 def RGB_led_twinkle():
     
