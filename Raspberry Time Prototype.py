@@ -135,40 +135,42 @@ for i in yellow_leds:
 GPIO.setup(22,GPIO.OUT)
 
 bootstrap1='''
-
-display.lcd_display_string(
-    ' RASPBERRY TIME', 1)
+display.lcd_display_string(title, 1)
 display.lcd_display_string(
     'SYS Bootstrap: 1', 2)
 '''
-bootstrap2='''
 
-display.lcd_display_string(
-    ' RASPBERRY TIME', 1)
+bootstrap2='''
+display.lcd_display_string(title, 1)
 display.lcd_display_string(
     'SYS Bootstrap: 2', 2)
 '''
-bootstrap3='''
 
-display.lcd_display_string(
-    ' RASPBERRY TIME', 1)
+bootstrap3='''
+display.lcd_display_string(title, 1)
 display.lcd_display_string(
     'SYS Bootstrap: 3', 2)    
 '''
-rgb_init='''
 
+rgb_init='''
 display.lcd_display_string(
     'RGB Initializing', 1)
 display.lcd_display_string(
     'Red/Green/Blue   ', 2)
 '''
-led_init='''
 
+led_init='''
 display.lcd_display_string(
     'LED Initializing', 1)
 display.lcd_display_string(
     'ALL LEDS ACTIVE:', 2)
 '''
+
+title=' RASPBERRY TIME '
+scrolltext='BY Joseph C. Richardson. \
+You can find all my Python Programs \
+on GitHub.com under my username Robomaster S1 .'
+
 def raspberry_time():
     
     while True:            
@@ -196,6 +198,12 @@ def raspberry_time():
             
             display.lcd_display_string(getdate,1)
             display.lcd_display_string(getyear,2)
+            
+        for i in range(len(scrolltext)):
+            display.lcd_display_string(title, 1)
+            display.lcd_display_string(
+            scrolltext[i:i+16],2)
+            wait(0.1) 
 
 def RGB_led_twinkle():
     
