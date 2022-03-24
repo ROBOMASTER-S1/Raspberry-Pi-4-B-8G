@@ -81,7 +81,7 @@
 # board layout, I use so you can follow
 # right along with my video example.
 
-import RPi.GPIO as GPIO,drivers,threading
+import time,RPi.GPIO as GPIO,drivers,threading
 from datetime import datetime
 from time import sleep as wait
 
@@ -104,6 +104,8 @@ RGB_logic=[18,16,12,[18,16],
 hz=500 # LED dimmer herz value
 
 led_speed=.1
+
+delay=30
 
 GPIO.setmode(GPIO.BOARD) # breadboard method
 GPIO.setwarnings(False) # disable setwarnings
@@ -132,23 +134,83 @@ for i in yellow_leds:
     
 GPIO.setup(22,GPIO.OUT)
 
+bootstrap1='''
+display.lcd_display_string(title, 1)
+display.lcd_display_string(
+    'SYS Bootstrap: 1', 2)
+'''
+
+bootstrap2='''
+display.lcd_display_string(title, 1)
+display.lcd_display_string(
+    'SYS Bootstrap: 2', 2)
+'''
+
+bootstrap3='''
+display.lcd_display_string(title, 1)
+display.lcd_display_string(
+    'SYS Bootstrap: 3', 2)    
+'''
+
+rgb_init='''
+display.lcd_display_string(
+    'RGB Initializing', 1)
+display.lcd_display_string(
+    'Red/Green/Blue   ', 2)
+'''
+
+led_init='''
+display.lcd_display_string(
+    'LED Initializing', 1)
+display.lcd_display_string(
+    'ALL LEDS ACTIVE:', 2)
+'''
+
+title=' RASPBERRY TIME '
+scrolltext='By Joseph C. Richardson. \
+You can find all my Python Programs \
+on GitHub.com under my username Robomaster S1 '
+
 def raspberry_time():
     
-    while True:
-        for i in range(20):
-            display.lcd_display_string(
-                ' RASPBERRY TIME', 1)
+    while True:            
+        for i in range(delay):
+            gettime=datetime.now().strftime('Local%l:%M:%S %p')
+            
+            display.lcd_display_string(title, 1)            
+            display.lcd_display_string(gettime,2)
+            
+        for i in range(delay):
+            gettime=datetime.now().strftime('Local %H:%M:%S  ')
+            
+            display.lcd_display_string(title, 1)            
+            display.lcd_display_string(gettime,2)
+            
+        for i in range(delay):
+            display.lcd_display_string(title, 1)
             display.lcd_display_string(
                 str(datetime.now().time())+' ', 2)
             
-        for i in range(20):
+        for i in range(delay):
+            getdate=datetime.now().strftime('%a %b%e, %Y')
+            getyear=datetime.now().strftime('Week #%U/Day %j')
+            
+            display.lcd_display_string(getdate,1)
+            display.lcd_display_string(getyear,2)
+            
+        display.lcd_display_string(title,1)            
+        display.lcd_display_string('By Joseph C. Ric',2)
+        wait(1)
+            
+        for i in range(len(scrolltext)):
+            display.lcd_display_string(title, 1)
             display.lcd_display_string(
-                ' RASPBERRY TIME', 1)
-            display.lcd_display_string(
-                str(datetime.now())+' ', 2)
+            scrolltext[i:i+16],2)
+            wait(0.1)
 
 def RGB_led_twinkle():
     
+    exec(rgb_init)
     for i in range(7):
         GPIO.output(RGB_logic[i],0)
         wait(led_speed)
@@ -160,7 +222,8 @@ def RGB_led_twinkle():
         GPIO.output(RGB_logic[i],1)
 
 def red_leds_flash():
-
+    
+    exec(led_init)
     for i in range(5):
         for j in red_leds:
             GPIO.output(j,1)
@@ -557,7 +620,8 @@ def red_leds_breathe():
     a9=GPIO.PWM(red_leds[9],hz)    
 
     dimmer=(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9)
-
+    
+    exec(bootstrap1)
     GPIO.output(RGB_led[0],0)
     for i in range(0,100,2):
         for j in dimmer:
@@ -566,7 +630,8 @@ def red_leds_breathe():
         for i in yellow_leds:
             GPIO.output(i,1)
             wait(.02)
-
+            
+    exec(bootstrap2)
     for i in range(100,-1,-2):
         GPIO.output(RGB_mix[1],0)
         for j in dimmer:
@@ -576,7 +641,20 @@ def red_leds_breathe():
             GPIO.output(i,0)
             wait(.02)
         GPIO.output(RGB_mix[1],1)
-    
+        
+    exec(bootstrap3)
+    GPIO.output(RGB_led[0],0)        
+    for i in range(0,100,2):
+        for j in dimmer:
+            j.start(0)
+            j.ChangeDutyCycle(i)
+        for i in yellow_leds:
+            GPIO.output(i,1)
+            wait(.02)
+    for i in yellow_leds:
+        GPIO.output(i,0)
+    GPIO.output(RGB_led[0],1)
+        
 led_functions=[
     red_led_single_left,
     red_led_single_right_inverse,
@@ -622,4 +700,4 @@ while True:
         print('cleanup/release all GPIO pinouts \
 to LOW state.')
         GPIO.cleanup()
-        break
+        break 
