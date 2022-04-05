@@ -64,7 +64,7 @@ control_shift=data_bit,latch,clock
 for i in control_shift:
     GPIO.setup(i,GPIO.OUT)
     
-for j in range(8):            
+for i in range(8):            
     bin=f'{i:b}'
     GPIO.output(latch,0)
     GPIO.output(data_bit,0)
@@ -115,7 +115,7 @@ while True:
         print('cleanup/release all GPIO pinouts \
 to LOW state.')
         
-        for j in range(8):            
+        for i in range(8):            
             bin=f'{i:b}'
             GPIO.output(latch,0)
             GPIO.output(data_bit,0)
