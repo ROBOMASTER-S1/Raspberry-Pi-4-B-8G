@@ -51,11 +51,11 @@ from time import sleep as wait
 GPIO.setmode(GPIO.BOARD) # breadboard method
 GPIO.setwarnings(False) # disable setwarnings
 
-data_bit=37
 latch=35
+data_bit=37
 clock=33
 
-led_speed=.5
+led_speed=.3
 
 control_shift=data_bit,latch,clock
 
@@ -65,8 +65,8 @@ for i in range(8):
     GPIO.output(latch,0)
     GPIO.output(data_bit,0)
     GPIO.output(clock,1)
-    GPIO.output(clock,0)
     GPIO.output(latch,1)
+    GPIO.output(clock,0)
 
 def binary_leds_default():
     
@@ -76,8 +76,8 @@ def binary_leds_default():
             GPIO.output(latch,0)
             GPIO.output(data_bit,int(bin[j])-1)
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
         wait(led_speed)
     
     for i in range(128,256):
@@ -86,8 +86,8 @@ def binary_leds_default():
             GPIO.output(latch,0)
             GPIO.output(data_bit,int(bin[j]))
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
         wait(led_speed)
         
 def binary_leds_inverse():
@@ -98,8 +98,8 @@ def binary_leds_inverse():
             GPIO.output(latch,0)
             GPIO.output(data_bit,int(bin[j]))
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
         wait(led_speed)
     
     for i in range(128,256):
@@ -108,8 +108,8 @@ def binary_leds_inverse():
             GPIO.output(latch,0)
             GPIO.output(data_bit,int(bin[j])-1)
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
         wait(led_speed)
 
 def binary_leds_mirror():
@@ -120,8 +120,8 @@ def binary_leds_mirror():
             GPIO.output(latch,0)
             GPIO.output(data_bit,int(bin[j])-1)
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
         wait(led_speed)
     
     for i in range(128,256):
@@ -130,8 +130,8 @@ def binary_leds_mirror():
             GPIO.output(latch,0)
             GPIO.output(data_bit,int(bin[j]))
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
         wait(led_speed)
         
 def binary_leds_mirror_inverse():
@@ -142,8 +142,8 @@ def binary_leds_mirror_inverse():
             GPIO.output(latch,0)
             GPIO.output(data_bit,int(bin[j]))
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
         wait(led_speed)
     
     for i in range(128,256):
@@ -152,15 +152,40 @@ def binary_leds_mirror_inverse():
             GPIO.output(latch,0)
             GPIO.output(data_bit,int(bin[j])-1)
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
         wait(led_speed)
         
-binary_leds_default()
-
 for i in range(8):            
     GPIO.output(latch,0)
     GPIO.output(data_bit,0)
     GPIO.output(clock,1)
-    GPIO.output(clock,0)
     GPIO.output(latch,1)
+    GPIO.output(clock,0)
+    
+while True:
+    try:
+        binary_leds_default()
+        binary_leds_mirror_inverse()
+        break
+    
+# Note: it is recomended that you setup
+# a KeyboardInterrupt handler to force
+# the GPIO pins to return to a low state/off.
+
+# GPIO.cleanup() sets all GPIO pins to LOW/OFF
+
+    except KeyboardInterrupt:
+        print('\nStop program Execution/run:')
+        print('cleanup/release all GPIO pinouts \
+to LOW state.')
+        
+        for i in range(8):            
+            GPIO.output(latch,0)
+            GPIO.output(data_bit,0)
+            GPIO.output(clock,1)
+            GPIO.output(latch,1)
+            GPIO.output(clock,0)
+            
+        GPIO.cleanup()
+        break
