@@ -56,8 +56,8 @@ display=drivers.Lcd() # enable the LCD display
 
 display.lcd_clear() # clear the LCD screen
 
-data_bit=37
 latch=35
+data_bit=37
 clock=33
 
 led_speed=.5
@@ -70,9 +70,9 @@ for i in range(8):
     GPIO.output(latch,0)
     GPIO.output(data_bit,0)
     GPIO.output(clock,1)
-    GPIO.output(clock,0)
     GPIO.output(latch,1)
-
+    GPIO.output(clock,0)
+    
 message='BYTE TRANSLATOR','ENTER 8b NUMBER:'
 value_error='BYTE VALUES ONLY','PLEASE: 0-255'
 index_error='VALUE EXCEEDS','BYTE RANGE 0-255'
@@ -103,8 +103,8 @@ while True:
                         GPIO.output(latch,0)
                         GPIO.output(data_bit,int(bin[j]))
                         GPIO.output(clock,1)
-                        GPIO.output(clock,0)
                         GPIO.output(latch,1)
+                        GPIO.output(clock,0)
                             
             except ValueError:
                 display.lcd_clear()
@@ -122,8 +122,8 @@ while True:
                 GPIO.output(latch,0)
                 GPIO.output(data_bit,0)
                 GPIO.output(clock,1)
-                GPIO.output(clock,0)
                 GPIO.output(latch,1)
+                GPIO.output(clock,0)
             
 # Note: it is recomended that you setup
 # a KeyboardInterrupt handler to force
@@ -140,8 +140,9 @@ to LOW state.')
             GPIO.output(latch,0)
             GPIO.output(data_bit,0)
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
+            
         display.lcd_clear()
         display.lcd_backlight(0)
         GPIO.cleanup()
