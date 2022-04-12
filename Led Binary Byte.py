@@ -1,4 +1,4 @@
-# Led Binary Byte Python program example:
+# LED Binary Byte Python program example:
 
 # Note: be mindful while working with
 # electroics. There are mistakes that
@@ -21,7 +21,7 @@
 # the Raspberry Pi fan, while in use/
 # operation.
 
-# Led Binary Byte Python program example:
+# LED Binary Byte Python program example:
 
 # This Raspberry Pi Python program allows
 # users to learn all about how binary data
@@ -52,8 +52,8 @@ display=drivers.Lcd() # enable the LCD display
 
 display.lcd_clear() # clear the LCD screen
 
-data_bit=37
 latch=35
+data_bit=37
 clock=33
 
 on_off=0,1,0,1,0,1,0
@@ -65,12 +65,11 @@ control_shift=data_bit,latch,clock
 for i in control_shift:GPIO.setup(i,GPIO.OUT)
     
 for i in range(8):            
-    bin=f'{i:b}'
     GPIO.output(latch,0)
     GPIO.output(data_bit,0)
-    GPIO.output(clock,1)
-    GPIO.output(clock,0)
+    GPIO.output(clock,1)    
     GPIO.output(latch,1)
+    GPIO.output(clock,0)
 
 title='LED BINARY BYTE ','Python Program  '
 programmer='BY Joseph C. Richardson, GitHub.com '
@@ -96,13 +95,13 @@ while True:
             f'Binary: {255-i:b}',1)
             display.lcd_display_string(
             f'Hex: {255-i:X} Dec: {255-i:d}',2)
+            bin=f'{i:b}'
             for j in range(8):                
-                bin=f'{i:b}'
                 GPIO.output(latch,0)
                 GPIO.output(data_bit,int(bin[j])-1)
                 GPIO.output(clock,1)
-                GPIO.output(clock,0)
                 GPIO.output(latch,1)
+                GPIO.output(clock,0)                
             wait(led_speed)
             
         for i in range(128,256):
@@ -110,13 +109,13 @@ while True:
             f'Binary: {i:b}',1)
             display.lcd_display_string(
             f'Hex: {i:X} Dec: {i:d}',2)
+            bin=f'{i:b}'
             for j in range(8):
-                bin=f'{i:b}'
                 GPIO.output(latch,0)
                 GPIO.output(data_bit,int(bin[j]))
                 GPIO.output(clock,1)
-                GPIO.output(clock,0)
                 GPIO.output(latch,1)
+                GPIO.output(clock,0)
             wait(led_speed)
             
         for i in range(7):
@@ -124,9 +123,10 @@ while True:
                 GPIO.output(latch,0)
                 GPIO.output(data_bit,on_off[i])
                 GPIO.output(clock,1)
-                GPIO.output(clock,0)
                 GPIO.output(latch,1)
+                GPIO.output(clock,0)
             wait(led_speed)
+        #break
             
 # Note: it is recomended that you setup
 # a KeyboardInterrupt handler to force
@@ -140,12 +140,12 @@ while True:
 to LOW state.')
         
         for i in range(8):            
-            bin=f'{i:b}'
             GPIO.output(latch,0)
             GPIO.output(data_bit,0)
             GPIO.output(clock,1)
-            GPIO.output(clock,0)
             GPIO.output(latch,1)
+            GPIO.output(clock,0)
+            
         display.lcd_clear()
         display.lcd_backlight(0)
         GPIO.cleanup()
