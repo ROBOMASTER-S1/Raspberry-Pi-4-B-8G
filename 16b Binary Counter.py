@@ -63,8 +63,6 @@ on_off=0,1,0,1,0,1,0
 
 led_speed=.5
 
-control_shift=data_bit,latch,clock
-
 stop_program_message='''
 print('Stop program Execution/run:')
 print('cleanup/release all GPIO pinouts \
