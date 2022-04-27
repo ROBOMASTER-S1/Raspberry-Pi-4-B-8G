@@ -52,9 +52,9 @@ display=drivers.Lcd() # enable the LCD display
 
 display.lcd_clear() # clear the LCD screen
 
-latch=23
-data_bit=29
-clock=21
+latch=33
+data_bit=35
+clock=31
 
 msbs=65535,65536
 lsbs=32767,32768
@@ -71,7 +71,7 @@ to LOW state.')'''
 title='16b BINARY COUNT ','Python Program  '
 programmer='BY Joseph C. Richardson, GitHub.com '
 
-control_shift=data_bit,latch,clock
+control_shift=latch,data_bit,clock
 
 for i in control_shift:GPIO.setup(i,GPIO.OUT)
     
@@ -79,8 +79,8 @@ for i in range(16):
     GPIO.output(latch,0)
     GPIO.output(data_bit,0)
     GPIO.output(clock,1)
-    GPIO.output(clock,0)
     GPIO.output(latch,1)
+    GPIO.output(clock,0)
 
 while True:
     display.lcd_display_string(title[0],1)
