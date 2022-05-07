@@ -47,7 +47,7 @@
 
 # Note: if you study these strings
 # and arrays, you can use them to make
-# the LEDs be different colours.
+# the two RGB leds be different colours.
 
 import RPi.GPIO as GPIO,drivers,threading
 from time import sleep as wait
@@ -65,7 +65,7 @@ clock=31
 msbs=65535,65536
 lsbs=32767,32768
 
-on_off=0,1,0,1,0,1,0,1,0
+on_off=0,1,0,1,0,1,0,1,0,1,0
 
 RGB_led1=[13,11,7]
 RGB_led2=[21,19,15]
@@ -157,7 +157,7 @@ while True:
             wait(0.2)
         wait(led_speed)
         display.lcd_clear()
-        
+        '''
         for i in range(msbs[0],lsbs[0],-1):
             display.lcd_display_string(
             f'{msbs[0]-i:b}',1)
@@ -190,9 +190,9 @@ while True:
                     GPIO.output(clock,1)
                     GPIO.output(latch,1)
                     GPIO.output(clock,0)
-                wait(led_speed)     
+                wait(led_speed)'''     
                     
-        for i in range(9):
+        for i in range(11):
             for j in range(16):
                 GPIO.output(latch,0)
                 GPIO.output(data_bit,on_off[i])
@@ -203,7 +203,7 @@ while True:
             for x in range(2):
                 exec(RGB_off)
                 exec(led_loop3[x])
-                wait(.3)
+                wait(led_speed)
         exec(RGB_off)
         break
 
