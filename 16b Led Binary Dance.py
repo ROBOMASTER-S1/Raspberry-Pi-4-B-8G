@@ -125,13 +125,7 @@ led_loop1=blue_green,green_blue
 led_loop2=red_yellow,yellow_red
 led_loop3=cyan,pink
 
-buz=23,29
-
 led_speed=.2
-
-for i in buz:
-    GPIO.setup(i,GPIO.OUT)
-    GPIO.output(i,0)
 
 for i in RGB_led1,RGB_led2:
     GPIO.setup(i,GPIO.OUT)
