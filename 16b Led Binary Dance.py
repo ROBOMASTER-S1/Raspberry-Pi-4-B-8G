@@ -49,7 +49,7 @@
 # and arrays, you can use them to make
 # the two RGB leds be different colours.
 
-import RPi.GPIO as GPIO,drivers,threading
+import RPi.GPIO as GPIO,drivers
 from time import sleep as wait
 
 GPIO.setmode(GPIO.BOARD) # breadboard method
@@ -125,11 +125,17 @@ led_loop1=blue_green,green_blue
 led_loop2=red_yellow,yellow_red
 led_loop3=cyan,pink
 
+buz=23,29
+
 led_speed=.2
+
+for i in buz:
+    GPIO.setup(i,GPIO.OUT)
+    GPIO.output(i,0)
 
 for i in RGB_led1,RGB_led2:
     GPIO.setup(i,GPIO.OUT)
-    GPIO.output(i,0)
+    GPIO.output(i,0)    
 
 control_shift=latch,data_bit,clock
 
@@ -166,7 +172,7 @@ while True:
             bin=f'{i:b}'
             for x in range(2):
                 exec(RGB_off)
-                exec(led_loop1[x])                
+                exec(led_loop1[x])
                 for j in range(16):
                     GPIO.output(latch,0)
                     GPIO.output(data_bit,int(bin[j])-1)
@@ -204,6 +210,7 @@ while True:
                 exec(RGB_off)
                 exec(led_loop3[x])
                 wait(led_speed)
+        display.lcd_clear()
         exec(RGB_off)
         break
 
