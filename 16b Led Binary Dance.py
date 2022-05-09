@@ -157,7 +157,7 @@ while True:
             wait(0.2)
         wait(led_speed)
         display.lcd_clear()
-        '''
+        
         for i in range(msbs[0],lsbs[0],-1):
             display.lcd_display_string(
             f'{msbs[0]-i:b}',1)
@@ -190,7 +190,7 @@ while True:
                     GPIO.output(clock,1)
                     GPIO.output(latch,1)
                     GPIO.output(clock,0)
-                wait(led_speed)'''     
+                wait(led_speed)   
                     
         for i in range(11):
             for j in range(16):
