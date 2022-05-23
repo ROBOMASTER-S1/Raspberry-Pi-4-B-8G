@@ -123,13 +123,19 @@ programmer='BY Joseph C. Richardson, GitHub.com '
 
 led_loop1=blue_green,green_blue
 led_loop2=red_yellow,yellow_red
-led_loop3=cyan,pink
+led_loop3=pink_cyan,cyan_pink
+
+buz=23,29
 
 led_speed=.2
 
+for i in buz:
+    GPIO.setup(i,GPIO.OUT)
+    GPIO.output(i,0)
+
 for i in RGB_led1,RGB_led2:
     GPIO.setup(i,GPIO.OUT)
-    GPIO.output(i,0)    
+    GPIO.output(i,0)
 
 control_shift=latch,data_bit,clock
 
@@ -153,8 +159,7 @@ while True:
         
         for i in range(len(programmer)):
             display.lcd_display_string(
-            programmer[i:i+16],2)
-            wait(0.2)
+            programmer[i:i+16],2);wait(0.2)
         wait(led_speed)
         display.lcd_clear()
         
@@ -167,14 +172,16 @@ while True:
             for x in range(2):
                 exec(RGB_off)
                 exec(led_loop1[x])
+                GPIO.output(buz[x],1);wait(.0035)
                 for j in range(16):
                     GPIO.output(latch,0)
                     GPIO.output(data_bit,int(bin[j])-1)
                     GPIO.output(clock,1)
                     GPIO.output(latch,1)
                     GPIO.output(clock,0)
+                GPIO.output(buz[x],0)
                 wait(led_speed)
-                
+            
         for i in range(lsbs[1],msbs[1]):
             display.lcd_display_string(
             f'{i:b}',1)
@@ -184,13 +191,15 @@ while True:
             for x in range(2):
                 exec(RGB_off)
                 exec(led_loop2[x])
+                GPIO.output(buz[x],1);wait(.0035)
                 for j in range(16):                
                     GPIO.output(latch,0)
                     GPIO.output(data_bit,int(bin[j]))
                     GPIO.output(clock,1)
                     GPIO.output(latch,1)
                     GPIO.output(clock,0)
-                wait(led_speed)   
+                GPIO.output(buz[x],0)
+                wait(led_speed)  
                     
         for i in range(11):
             for j in range(16):
@@ -203,8 +212,11 @@ while True:
             for x in range(2):
                 exec(RGB_off)
                 exec(led_loop3[x])
+                GPIO.output(buz[x],1)
                 wait(led_speed)
+                GPIO.output(buz[x],0)
         display.lcd_clear()
+        display.lcd_backlight(0)
         exec(RGB_off)
         break
 
