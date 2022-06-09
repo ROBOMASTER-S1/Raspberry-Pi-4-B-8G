@@ -2,7 +2,7 @@
 # example:
 
 # Note: be mindful while working with
-# electroics. There are mistakes that
+# electronics. There are mistakes that
 # cannot be corrected should you ignore
 # any basic electronics rules. Electronics
 # demands basic math skills and knowledge
