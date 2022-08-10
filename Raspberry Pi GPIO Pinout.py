@@ -1,3 +1,10 @@
+# Note: be mindful while working with
+# electronics. There are mistakes that
+# cannot be corrected should you ignore
+# any basic electronics rules. Electronics
+# demands basic math skills and knowledge
+# of electronics components alike.
+
 # These are all the GPIO pins that you can use for lighting
 # up LEDs or whatever devices that can 'safely' use these
 # GPIO pins. I'm pretty new to using Raspberry Pi, I created
