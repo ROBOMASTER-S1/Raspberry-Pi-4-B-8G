@@ -1,4 +1,4 @@
-# 16b Shift Register Fun Python program example:
+# 24b Shift Register Fun Python program example:
 
 # Created by Joseph C. Richardson, GitHub.com
 
@@ -14,19 +14,19 @@
 # Respberry Pi 4 = 1
 # breadboard = 1 or more depending
 # 74HC595 shift register = 2
-# LEDs = 16
-# 220 ohm resistor = 16
+# LEDs = 24
+# 220 ohm resistor = 24
 # jumper wire = 38 or more +2 for the Rasp pi 4 fan
 
 # Note: use two other jumper wires for
 # the Raspberry Pi 4 fan, while in use/
 # operation.
 
-# 16b Shift Register Fun Python program example:
+# 24b Shift Register Fun Python program example:
 
 # This Raspberry Pi 4 Python program allows
 # users to have tons of fun, while learning
-# how two 8b 74HC595 shift registers work.
+# how three 8b 74HC595 shift registers work.
 
 # We will use the breadboard method:
 
