@@ -4,6 +4,7 @@ buzzpin=11
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(buzzpin,GPIO.OUT)
 buzz=GPIO.PWM(buzzpin,400)
+
 buzz.start(50)
 try:
     while True:        
